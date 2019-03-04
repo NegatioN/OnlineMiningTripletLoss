@@ -1,0 +1,2 @@
+numpy<=1.15.4
+torch==torch-1.0.1.post2
