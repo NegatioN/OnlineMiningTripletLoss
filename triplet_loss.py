@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8
-
 import torch
 
-#TODO clean up commented code
-#TODO re-add comments from article in their proper place?
 
 def batch_hard_triplet_loss(labels, embeddings, margin, squared=False):
     """Build the triplet loss over a batch of embeddings.
