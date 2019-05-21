@@ -3,7 +3,7 @@
 import torch
 
 
-def batch_hard_triplet_loss(labels, embeddings, margin, squared=False):
+def batch_hard_triplet_loss(labels, embeddings, margin, squared=False, device='cpu'):
     """Build the triplet loss over a batch of embeddings.
 
     For each anchor, we get the hardest positive and hardest negative to form a triplet.
@@ -23,7 +23,7 @@ def batch_hard_triplet_loss(labels, embeddings, margin, squared=False):
 
     # For each anchor, get the hardest positive
     # First, we need to get a mask for every valid positive (they should have same label)
-    mask_anchor_positive = _get_anchor_positive_triplet_mask(labels).float()
+    mask_anchor_positive = _get_anchor_positive_triplet_mask(labels, device).float()
 
     # We put to 0 any element where (a, p) is not valid (valid if a != p and label(a) == label(p))
     anchor_positive_dist = mask_anchor_positive * pairwise_dist
@@ -161,7 +161,7 @@ def _get_triplet_mask(labels):
     return valid_labels & distinct_indices
 
 
-def _get_anchor_positive_triplet_mask(labels):
+def _get_anchor_positive_triplet_mask(labels, device):
     """Return a 2D mask where mask[a, p] is True iff a and p are distinct and have same label.
     Args:
         labels: tf.int32 `Tensor` with shape [batch_size]
@@ -169,7 +169,7 @@ def _get_anchor_positive_triplet_mask(labels):
         mask: tf.bool `Tensor` with shape [batch_size, batch_size]
     """
     # Check that i and j are distinct
-    indices_equal = torch.eye(labels.size(0)).byte()
+    indices_equal = torch.eye(labels.size(0)).byte().to(device)
     indices_not_equal = ~indices_equal
 
     # Check if labels[i] == labels[j]
@@ -190,4 +190,3 @@ def _get_anchor_negative_triplet_mask(labels):
     # Uses broadcasting where the 1st argument has shape (1, batch_size) and the 2nd (batch_size, 1)
 
     return ~(labels.unsqueeze(0) == labels.unsqueeze(1))
-
