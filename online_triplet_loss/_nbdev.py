@@ -7,7 +7,7 @@ index = {"batch_hard_triplet_loss": "triplet_loss.ipynb",
 
 modules = ["losses.py"]
 
-doc_url = "https://NegatioN.github.io/online_triplet_loss/"
+doc_url = "https://NegatioN.github.io/OnlineMiningTripletLoss/"
 
 git_url = "https://github.com/NegatioN/OnlineMiningTripletLoss/tree/master/"
 
