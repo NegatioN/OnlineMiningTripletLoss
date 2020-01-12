@@ -7,8 +7,8 @@ index = {"batch_hard_triplet_loss": "triplet_loss.ipynb",
 
 modules = ["losses.py"]
 
-doc_url = "https://"NegatioN".github.io/online_triplet_loss/"
+doc_url = "https://NegatioN.github.io/online_triplet_loss/"
 
-git_url = "https://github.com/"NegatioN"/OnlineMiningTripletLoss/tree/master/"
+git_url = "https://github.com/NegatioN/OnlineMiningTripletLoss/tree/master/"
 
 def custom_doc_links(name): return None
