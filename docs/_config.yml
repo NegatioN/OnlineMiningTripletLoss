@@ -1,4 +1,4 @@
-repository: "NegatioN"/"online_triplet_loss"
+repository: "NegatioN/OnlineMiningTripletLoss"
 output: web
 topnav_title: "online_triplet_loss"
 site_title: "online_triplet_loss"
