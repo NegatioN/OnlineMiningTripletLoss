@@ -10,7 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Title
+      title: Losses
       url: /triplet_loss
     output: web
     title: online_triplet_loss
