@@ -5,7 +5,8 @@ title: online_triplet_loss
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "PyTorch conversion of the excellent post on the [same topic in Tensorflow](https://omoindrot.github.io/triplet-loss). Simply an implementation of a triple loss with online mining of candidate triplets used in semi-supervised learning."
+summary: "PyTorch conversion of the excellent post on the <a href='https://omoindrot.github.io/triplet-loss'>same topic in Tensorflow</a>. Simply an implementation of a triple loss with online mining of candidate triplets used in semi-supervised learning."
+description: "PyTorch conversion of the excellent post on the <a href='https://omoindrot.github.io/triplet-loss'>same topic in Tensorflow</a>. Simply an implementation of a triple loss with online mining of candidate triplets used in semi-supervised learning."
 ---
 <!--
 
@@ -18,13 +19,17 @@ summary: "PyTorch conversion of the excellent post on the [same topic in Tensorf
 -->
 
 <div class="container" id="notebook-container">
+        
+    {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install">Install<a class="anchor-link" href="#Install">&#182;</a></h2>
+<h2 id="Install">Install<a class="anchor-link" href="#Install"> </a></h2>
 </div>
 </div>
 </div>
@@ -40,11 +45,13 @@ summary: "PyTorch conversion of the excellent post on the [same topic in Tensorf
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-use">How to use<a class="anchor-link" href="#How-to-use">&#182;</a></h2><p>In these examples I use a really large margin, since the embedding space is so small. A more realistic margins seems to be between <code>0.1 and 2.0</code></p>
+<h2 id="How-to-use">How to use<a class="anchor-link" href="#How-to-use"> </a></h2><p>In these examples I use a really large margin, since the embedding space is so small. A more realistic margins seems to be between <code>0.1 and 2.0</code></p>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -61,6 +68,10 @@ summary: "PyTorch conversion of the excellent post on the [same topic in Tensorf
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -107,6 +118,10 @@ Loss: tensor(95.1271, grad_fn=&lt;MeanBackward0&gt;)
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -152,9 +167,11 @@ Loss: tensor(94.9947, grad_fn=&lt;DivBackward0&gt;)
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><ul>
+<h2 id="References">References<a class="anchor-link" href="#References"> </a></h2><ul>
 <li><a href="https://github.com/omoindrot/tensorflow-triplet-loss">Triplet Loss and Online Triplet Mining in Tensorflow</a></li>
 <li><a href="https://arxiv.org/abs/1503.03832">Facenet paper</a></li>
 <li><a href="https://github.com/adambielski/siamese-triplet">adambielski's nice implementation</a> (unfortunately context switches between CPU / GPU)</li>
