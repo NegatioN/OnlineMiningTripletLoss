@@ -4,6 +4,7 @@ __all__ = ['batch_hard_triplet_loss', 'batch_all_triplet_loss']
 
 # Cell
 import torch
+import torch.nn.functional as F
 def _pairwise_distances(embeddings, squared=False):
     """Compute the 2D matrix of distances between all the embeddings.
 
@@ -140,7 +141,7 @@ def batch_hard_triplet_loss(labels, embeddings, margin, squared=False):
 
     # Combine biggest d(a, p) and smallest d(a, n) into final triplet loss
     tl = hardest_positive_dist - hardest_negative_dist + margin
-    tl[tl < 0] = 0
+    tl = F.relu(tl)
     triplet_loss = tl.mean()
 
     return triplet_loss
@@ -181,7 +182,7 @@ def batch_all_triplet_loss(labels, embeddings, margin, squared=False):
     triplet_loss = mask.float() * triplet_loss
 
     # Remove negative losses (i.e. the easy triplets)
-    triplet_loss[triplet_loss < 0] = 0
+    triplet_loss = F.relu(triplet_loss)
 
     # Count number of positive triplets (where triplet_loss > 0)
     valid_triplets = triplet_loss[triplet_loss > 1e-16]
