@@ -49,7 +49,7 @@ def _get_triplet_mask(labels):
         labels: tf.int32 `Tensor` with shape [batch_size]
     """
     # Check that i, j and k are distinct
-    indices_equal = torch.eye(labels.size(0)).bool()
+    indices_equal = torch.eye(labels.size(0), device=labels.device).bool()
     indices_not_equal = ~indices_equal
     i_not_equal_j = indices_not_equal.unsqueeze(2)
     i_not_equal_k = indices_not_equal.unsqueeze(1)
@@ -67,7 +67,7 @@ def _get_triplet_mask(labels):
     return valid_labels & distinct_indices
 
 
-def _get_anchor_positive_triplet_mask(labels, device):
+def _get_anchor_positive_triplet_mask(labels):
     """Return a 2D mask where mask[a, p] is True iff a and p are distinct and have same label.
     Args:
         labels: tf.int32 `Tensor` with shape [batch_size]
@@ -75,7 +75,7 @@ def _get_anchor_positive_triplet_mask(labels, device):
         mask: tf.bool `Tensor` with shape [batch_size, batch_size]
     """
     # Check that i and j are distinct
-    indices_equal = torch.eye(labels.size(0)).bool().to(device)
+    indices_equal = torch.eye(labels.size(0), device=labels.device).bool()
     indices_not_equal = ~indices_equal
 
     # Check if labels[i] == labels[j]
@@ -99,7 +99,7 @@ def _get_anchor_negative_triplet_mask(labels):
 
 
 # Cell
-def batch_hard_triplet_loss(labels, embeddings, margin, squared=False, device='cpu'):
+def batch_hard_triplet_loss(labels, embeddings, margin, squared=False):
     """Build the triplet loss over a batch of embeddings.
 
     For each anchor, we get the hardest positive and hardest negative to form a triplet.
@@ -119,7 +119,7 @@ def batch_hard_triplet_loss(labels, embeddings, margin, squared=False, device='c
 
     # For each anchor, get the hardest positive
     # First, we need to get a mask for every valid positive (they should have same label)
-    mask_anchor_positive = _get_anchor_positive_triplet_mask(labels, device).float()
+    mask_anchor_positive = _get_anchor_positive_triplet_mask(labels).float()
 
     # We put to 0 any element where (a, p) is not valid (valid if a != p and label(a) == label(p))
     anchor_positive_dist = mask_anchor_positive * pairwise_dist
@@ -192,6 +192,5 @@ def batch_all_triplet_loss(labels, embeddings, margin, squared=False):
 
     # Get final mean triplet loss over the positive valid triplets
     triplet_loss = triplet_loss.sum() / (num_positive_triplets + 1e-16)
-    print(triplet_loss, fraction_positive_triplets)
 
     return triplet_loss, fraction_positive_triplets
